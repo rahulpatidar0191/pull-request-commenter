@@ -15,6 +15,7 @@ Include the following in your workflow file:
     fail-on-output: <true_or_false>
     gif-search-term: <search_term_for_gif>
     giphy-api-key: <your_giphy_api_key>
+    github-token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 ## Inputs
@@ -29,6 +30,7 @@ comment-edit-mode | Edit mode for the comment (append or replace) |	No |	replace
 fail-on-output |	Whether to fail the workflow if there is a comment body or not | No |	false
 gif-search-term | Search term for gif | No |
 giphy-api-key | Your giphy api key | No |
+github-token | GitHub token | No | ${{ github.token }}
 
 ## Example
 ```yaml
@@ -59,4 +61,5 @@ jobs:
         comment-search-includes: Output from the script
         comment-title: Output from the script
         fail-on-output: true
+        github-token: ${{ secrets.GITHUB_TOKEN }}
 ```

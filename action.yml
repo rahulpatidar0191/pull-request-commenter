@@ -32,6 +32,9 @@ inputs:
   giphy_api_key:
     description: 'Giphy API key'
     required: false
+  github_token:
+    description: 'GitHub token'
+    required: true
 
 runs:
   using: composite
@@ -59,20 +62,20 @@ runs:
       if: inputs.comment-body
       uses: peter-evans/create-or-update-comment@v1
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ inputs.github_token }}
         issue-number: ${{ github.event.number }}
         comment-id: ${{ steps.find_comment.outputs.comment-id }}
         body: |
           ${{ inputs.comment-title }}<br />
           <pre>${{ inputs.comment-body }}</pre> <br />
-          ${{ env.GIF_URL && '![GIF](' + env.GIF_URL + ')' }}
+          ${{ env.GIF_URL != '' ? '![GIF](' + env.GIF_URL + ')' : '' }}
         edit-mode: ${{ inputs.comment-edit-mode }}
         reactions: ${{ inputs.comment-reactions }}
 
     - name: Remove comment if body is empty
       if: inputs.comment-body == '' && inputs.remove-comment-if-no-output == 'true'
       env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GH_TOKEN: ${{ inputs.github_token }}
       shell: bash
       run: |
         comment_id=${{ steps.find_comment.outputs.comment-id }}
