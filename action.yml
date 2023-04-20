@@ -20,6 +20,9 @@ inputs:
   comment-reactions:
     description: 'Reactions to add to the comment'
     required: false
+  comment-pre-tag:
+    description: 'Whether to wrap the comment body in a <pre> tag'
+    default: 'true'
   remove-comment-if-no-output:
     description: 'Whether to remove the comment if there is no body'
     default: 'true'
@@ -67,7 +70,7 @@ runs:
         comment-id: ${{ steps.find_comment.outputs.comment-id }}
         body: |
           ${{ inputs.comment-title }}<br />
-          <pre>${{ inputs.comment-body }}</pre> <br />
+          ${{ inputs.comment-pre-tag == 'true' && '<pre>' || '' }}${{ inputs.comment-body }}${{ inputs.comment-pre-tag == 'true' && '</pre>' || '' }}<br />
         edit-mode: ${{ inputs.comment-edit-mode }}
         reactions: ${{ inputs.comment-reactions }}
 
@@ -80,7 +83,7 @@ runs:
         comment-id: ${{ steps.find_comment.outputs.comment-id }}
         body: |
           ${{ inputs.comment-title }}<br />
-          <pre>${{ inputs.comment-body }}</pre> <br />
+          ${{ inputs.comment-pre-tag == 'true' && '<pre>' || '' }}${{ inputs.comment-body }}${{ inputs.comment-pre-tag == 'true' && '</pre>' || '' }}<br />
           ![GIF](${{ env.GIF_URL }})
         edit-mode: ${{ inputs.comment-edit-mode }}
         reactions: ${{ inputs.comment-reactions }}

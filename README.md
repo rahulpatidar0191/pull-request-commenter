@@ -11,6 +11,7 @@ Include the following in your workflow file:
     comment-search-includes: <text_to_search_for_in_existing_comments>
     comment-title: <title_for_the_comment>
     comment-reactions: <comma_separated_list_of_reactions>
+    comment-pre-tag: <true_or_false>
     remove-comment-if-no-output: <true_or_false>
     fail-on-output: <true_or_false>
     gif-search-term: <search_term_for_gif>
@@ -19,18 +20,19 @@ Include the following in your workflow file:
 ```
 
 ## Inputs
-Name | Description | Required | Default
----|---|---|-----
-comment-body | Content for comment body | Yes	|
-comment-search-includes |	The text to search for in existing comments |	Yes	
-comment-title	| Title for the comment |	Yes	
-comment-reactions | Comma separated list of reactions | No |
-remove-comment-if-no-output | Whether to remove the comment if there is no output | No | True
-comment-edit-mode | Edit mode for the comment (append or replace) |	No |	replace
-fail-on-output |	Whether to fail the workflow if there is a comment body or not | No |	false
-gif-search-term | Search term for gif | No |
-giphy-api-key | Your giphy api key | No |
-github-token | GitHub token | No |
+Name | Description                                                     | Required | Default
+---|-----------------------------------------------------------------|----------|-----
+comment-body | Content for comment body                                        | Yes	     |
+comment-search-includes | 	The text to search for in existing comments                    | 	Yes	    
+comment-title	| Title for the comment                                           | 	Yes	    
+comment-reactions | Comma separated list of reactions                               | No       |
+comment-edit-mode | Edit mode for the comment (append or replace)                   | 	No      |	replace
+comment-pre-tag | Whether to wrap the comment body in a ```<pre>``` tag            | No       | True
+remove-comment-if-no-output | Whether to remove the comment if there is no output             | No       | True
+fail-on-output | 	Whether to fail the workflow if there is a comment body or not | No       |	false
+gif-search-term | Search term for gif                                             | No       |
+giphy-api-key | Your giphy api key                                              | No       |
+github-token | GitHub token                                                    | Yes      |
 
 ## Example
 ```yaml
