@@ -98,6 +98,6 @@ runs:
       if: inputs.comment-body != '' && inputs.fail-on-output == 'true'
       shell: bash
       run: |
-        echo "::error::Errors found in the output"
+        echo "::error::Input 'comment-body' is not empty. This is not allowed when 'fail-on-output' is true. Workflow failed."
         exit 1
 
