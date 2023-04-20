@@ -5,7 +5,7 @@ GitHub action that comments on your pull request if you have you input a variabl
 Include the following in your workflow file:
 ```yaml
 - name: Run Pull Request Commenter
-  uses: <your-github-username>/pull-request-commenter@<tag/branch>
+  uses: OrjanSkarnes/pull-request-commenter@<tag/branch>
   with:
     comment-body: <content_for_comment_body>
     comment-search-includes: <text_to_search_for_in_existing_comments>
@@ -53,7 +53,7 @@ jobs:
         echo "ERROR=$message" >> $GITHUB_ENV
 
     - name: Run Python Script Output Commenter
-      uses: <your-github-username>/pull-request-commenter@<tag/branch>
+      uses: OrjanSkarnes/pull-request-commenter@<tag/branch>
       with:
         comment-body: ${{ env.ERROR }}
         comment-search-includes: Output from the script
