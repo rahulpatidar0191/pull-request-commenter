@@ -30,7 +30,7 @@ comment-edit-mode | Edit mode for the comment (append or replace) |	No |	replace
 fail-on-output |	Whether to fail the workflow if there is a comment body or not | No |	false
 gif-search-term | Search term for gif | No |
 giphy-api-key | Your giphy api key | No |
-github-token | GitHub token | No | ${{ github.token }}
+github-token | GitHub token | No |
 
 ## Example
 ```yaml

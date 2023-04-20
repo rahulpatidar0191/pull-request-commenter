@@ -62,6 +62,7 @@ runs:
       if: inputs.comment-body && !env.GIF_URL
       uses: peter-evans/create-or-update-comment@v1
       with:
+        token: ${{ inputs.github_token }}
         issue-number: ${{ github.event.number }}
         comment-id: ${{ steps.find_comment.outputs.comment-id }}
         body: |
@@ -74,6 +75,7 @@ runs:
       if: inputs.comment-body && env.GIF_URL
       uses: peter-evans/create-or-update-comment@v1
       with:
+        token: ${{ inputs.github_token }}
         issue-number: ${{ github.event.number }}
         comment-id: ${{ steps.find_comment.outputs.comment-id }}
         body: |
