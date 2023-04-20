@@ -1,5 +1,9 @@
 name: 'Pull Request Commenter'
+author: 'Ørjan Skårnes'
 description: 'Create or update a comment on a pull request'
+branding:
+  icon: 'git-pull-request'
+  color: 'yellow'
 inputs:
   comment-body:
     description: 'Content for comment body'
