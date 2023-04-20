@@ -58,8 +58,8 @@ runs:
         comment-author: 'github-actions[bot]'
         body-includes: ${{ inputs.comment-search-includes }}
 
-    - name: Create or update comment with the output
-      if: inputs.comment-body
+    - name: Create or update comment with the output (without gif)
+      if: inputs.comment-body && !env.GIF_URL
       uses: peter-evans/create-or-update-comment@v1
       with:
         token: ${{ inputs.github_token }}
@@ -68,7 +68,20 @@ runs:
         body: |
           ${{ inputs.comment-title }}<br />
           <pre>${{ inputs.comment-body }}</pre> <br />
-          ${{ env.GIF_URL != '' ? '![GIF](' + env.GIF_URL + ')' : '' }}
+        edit-mode: ${{ inputs.comment-edit-mode }}
+        reactions: ${{ inputs.comment-reactions }}
+
+    - name: Create or update comment with the output (with gif)
+      if: inputs.comment-body && env.GIF_URL
+      uses: peter-evans/create-or-update-comment@v1
+      with:
+        token: ${{ inputs.github_token }}
+        issue-number: ${{ github.event.number }}
+        comment-id: ${{ steps.find_comment.outputs.comment-id }}
+        body: |
+          ${{ inputs.comment-title }}<br />
+          <pre>${{ inputs.comment-body }}</pre> <br />
+          ![GIF](${{ env.GIF_URL }})
         edit-mode: ${{ inputs.comment-edit-mode }}
         reactions: ${{ inputs.comment-reactions }}
 
