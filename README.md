@@ -1,8 +1,8 @@
-#Pull Request Commenter
+# Pull Request Commenter <br />
 GitHub action that comments on your pull request if you have you input a variable, it creates or updates a comment in the pull request with the output. It can also fail the workflow based on the output.
-Usage
-Include the following in your workflow file:
 
+## Usage<br />
+Include the following in your workflow file:
 ```yaml
 - name: Run Pull Request Commenter
   uses: <your-github-username>/pull-request-commenter@<tag/branch>
@@ -10,20 +10,27 @@ Include the following in your workflow file:
     comment-body: <content_for_comment_body>
     comment-search-includes: <text_to_search_for_in_existing_comments>
     comment-title: <title_for_the_comment>
+    comment-reactions: <comma_separated_list_of_reactions>
+    remove-comment-if-no-output: <true_or_false>
     fail-on-output: <true_or_false>
-    gif: <search_term_for_gif>
+    gif-search-term: <search_term_for_gif>
+    giphy-api-key: <your_giphy_api_key>
 ```
 
-
+## Inputs
 Name | Description | Required | Default
 ---|---|---|-----
 comment-body | Content for comment body | Yes	|
 comment-search-includes |	The text to search for in existing comments |	Yes	
 comment-title	| Title for the comment |	Yes	
+comment-reactions | Comma separated list of reactions | No |
+remove-comment-if-no-output | Whether to remove the comment if there is no output | No | True
 comment-edit-mode | Edit mode for the comment (append or replace) |	No |	replace
 fail-on-output |	Whether to fail the workflow if there is a comment body or not | No |	false
+gif-search-term | Search term for gif | No |
+giphy-api-key | Your giphy api key | No |
 
-
+## Example
 ```yaml
 name: Check Translations
 on:
@@ -48,8 +55,8 @@ jobs:
     - name: Run Python Script Output Commenter
       uses: <your-github-username>/pull-request-commenter@<tag/branch>
       with:
-        script-output: ${{ env.ERROR }}
+        comment-body: ${{ env.ERROR }}
         comment-search-includes: Output from the script
-        comment-title: Output from the script:
+        comment-title: Output from the script
         fail-on-output: true
 ```
