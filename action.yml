@@ -42,6 +42,13 @@ inputs:
 runs:
   using: composite
   steps:
+    # Add this before the 'Fetch random missing gif from Giphy' step
+    - name: Checkout pull-request-commenter repository
+      if: inputs.comment-body && inputs.gif_search_term && inputs.giphy_api_key
+      uses: actions/checkout@v3
+      with:
+        repository: OrjanSkarnes/pull-request-commenter
+
     - name: Fetch random missing gif from Giphy
       if: inputs.comment-body && inputs.gif_search_term && inputs.giphy_api_key
       id: missing_gif
